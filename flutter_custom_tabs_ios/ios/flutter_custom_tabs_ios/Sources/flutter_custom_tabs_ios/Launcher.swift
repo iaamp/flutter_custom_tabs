@@ -14,12 +14,15 @@ open class Launcher {
   }
 
   open func present(_ viewControllerToPresent: UIViewController, completion: ((Bool) -> Void)? = nil) {
-    if let topViewController = UIWindow.keyWindow?.topViewController() {
-      topViewController.present(viewControllerToPresent, animated: true) {
+    guard let root = UIWindow.keyWindow?.rootViewController else {
+      completion?(false)
+      return
+    }
+    let top = recursivelyFindTopViewController(from: root)
+    DispatchQueue.main.async {
+      top?.present(viewControllerToPresent, animated: true) {
         completion?(true)
       }
-    } else {
-      completion?(false)
     }
   }
 
@@ -73,10 +76,17 @@ open class Launcher {
 
 private extension UIWindow {
   static var keyWindow: UIWindow? {
-    guard let delegate = UIApplication.shared.delegate as? FlutterAppDelegate else {
-      return UIApplication.shared.windows.first(where: \.isKeyWindow)
+    // iOS 13+
+    if #available(iOS 13.0, *) {
+      return UIApplication.shared.connectedScenes
+      .compactMap { $0 as? UIWindowScene }
+      .filter { $0.activationState == .foregroundActive }
+      .first?
+      .windows
+      .first { $0.isKeyWindow }
     }
-    return delegate.window
+    // iOS 12 fallback
+    return UIApplication.shared.windows.first { $0.isKeyWindow }
   }
 
   func topViewController() -> UIViewController? {
