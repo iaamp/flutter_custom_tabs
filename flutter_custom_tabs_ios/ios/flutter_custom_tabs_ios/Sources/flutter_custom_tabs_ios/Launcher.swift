@@ -14,15 +14,12 @@ open class Launcher {
   }
 
   open func present(_ viewControllerToPresent: UIViewController, completion: ((Bool) -> Void)? = nil) {
-    guard let root = UIWindow.keyWindow?.rootViewController else {
+    guard let topViewController = UIWindow.keyWindow?.topViewController() else {
       completion?(false)
       return
     }
-    let top = recursivelyFindTopViewController(from: root)
-    DispatchQueue.main.async {
-      top?.present(viewControllerToPresent, animated: true) {
-        completion?(true)
-      }
+    topViewController.present(viewControllerToPresent, animated: true) {
+      completion?(true)
     }
   }
 
