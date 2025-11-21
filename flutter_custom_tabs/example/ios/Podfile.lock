@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_custom_tabs_ios (2.4.0):
+  - flutter_custom_tabs_ios (2.4.1):
     - Flutter
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_custom_tabs_ios: 89e60122b553c69a79bfd45eb8eb99d911c1a9c0
+  flutter_custom_tabs_ios: 778a36f3f80e55bbd1a23d2b0582b0afdc38b4c5
 
 PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 

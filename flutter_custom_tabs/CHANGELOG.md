@@ -1,8 +1,13 @@
+## 2.4.1
+
+- Updates minimum required `flutter_custom_tabs_ios` version to 2.4.1.
+  - Fix SFSafariViewController launch failure under UIScene lifecycle.
+
 ## 2.4.0
 
 - Always enables app-specific history for lightweight URL launch.
 - Corrects minimum iOS version support.
-- Updates minimum required `flutter_custom_tabs_androidios` version to 2.4.0.
+- Updates minimum required `flutter_custom_tabs_ios` version to 2.4.0.
   - This version introduces Swift Package Manager (SPM) support.
   - Note that due to the removal of unnecessary bridge code, running `flutter clean` might be required after upgrading to this version to avoid potential build issues.
 - Updates minimum required `flutter_custom_tabs_android` version to 2.3.1.
