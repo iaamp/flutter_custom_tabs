@@ -1,3 +1,7 @@
+## 2.4.1
+
+- Fix SFSafariViewController launch failure under UIScene lifecycle.
+
 ## 2.4.0
 
 - Adds Swift Package Manager(SPM) support.
