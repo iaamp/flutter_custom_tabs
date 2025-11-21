@@ -14,15 +14,12 @@ open class Launcher {
   }
 
   open func present(_ viewControllerToPresent: UIViewController, completion: ((Bool) -> Void)? = nil) {
-    guard let root = UIWindow.keyWindow?.rootViewController else {
+    guard let topViewController = UIWindow.keyWindow?.topViewController() else {
       completion?(false)
       return
     }
-    let top = recursivelyFindTopViewController(from: root)
-    DispatchQueue.main.async {
-      top?.present(viewControllerToPresent, animated: true) {
-        completion?(true)
-      }
+    topViewController.present(viewControllerToPresent, animated: true) {
+      completion?(true)
     }
   }
 
@@ -79,11 +76,11 @@ private extension UIWindow {
     // iOS 13+
     if #available(iOS 13.0, *) {
       return UIApplication.shared.connectedScenes
-      .compactMap { $0 as? UIWindowScene }
-      .filter { $0.activationState == .foregroundActive }
-      .first?
-      .windows
-      .first { $0.isKeyWindow }
+        .compactMap { $0 as? UIWindowScene }
+        .filter { $0.activationState == .foregroundActive }
+        .first?
+        .windows
+        .first { $0.isKeyWindow }
     }
     // iOS 12 fallback
     return UIApplication.shared.windows.first { $0.isKeyWindow }
